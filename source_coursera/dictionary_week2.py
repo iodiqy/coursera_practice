@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 #!DICTIONARY!#
 ################
 #------------------#
@@ -139,5 +140,24 @@ for word in zen.split():
 
 print(zen_map)
 
+
+#most common 3 words
+import operator
+
 zen_items = zen_map.items()
-print(zen_items)
+word_count_items = sorted(
+	zen_items, key=operator.itemgetter(1), reverse=True
+)
+
+print(word_count_items[:3]) #$> [('is', 10), ('better', 8), ('than', 8)]
+
+
+#most common 3 words v2
+from collections import Counter
+
+cleaned_list = []
+for word in zen.split():
+	cleaned_list.append(word.strip('.,!-').lower())
+
+print(Counter(cleaned_list).most_common(3)) 
+#$> [('is', 10), ('better', 8), ('than', 8)]
